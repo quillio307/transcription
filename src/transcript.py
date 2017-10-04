@@ -40,7 +40,8 @@ def transcribe_file(speech_file):
         encoding=enums.RecognitionConfig.AudioEncoding.FLAC,
         sample_rate_hertz=44100,
         language_code='en-US',
-        max_alternatives=16)
+        max_alternatives=16,
+        enable_word_time_offsets=1)
 
     # [START migration_async_response]
     operation = client.long_running_recognize(config, audio)
@@ -50,25 +51,27 @@ def transcribe_file(speech_file):
     response = operation.result(timeout=90)
     print(operation.metadata())
     # Print the first alternative of all the consecutive results.
-    i = 0;
+    #i = 0;
     for result in response.results:
         print('Transcript: {}'.format(result.alternatives[0].transcript))
         print('Confidence: {}'.format(result.alternatives[0].confidence))
-        for word in result.alternatives[0].words:
-            print(word)
+        #words = result.alternatives[0].words
+        #for i in range(0,len(words)):
+        #    print(words[i].word)
+        #    print(words[i].start_time)
     # [END migration_async_response]
 # [END def_transcribe_file]
 
 def main():
-
     from googleapiclient.discovery import build
     from oauth2client.client import GoogleCredentials
     credentials = GoogleCredentials.get_application_default()
     service = build('compute', 'v1', credentials=credentials)
 
-
     #transcribe_gcs("gs://cloud-samples-tests/speech/brooklyn.flac")
     transcribe_file("../test_audio_files/test_audio_2_mono.flac");
+    #transcribe_file("../test_audio_files/conversation_1.flac");
+    #transcribe_file("../test_audio_files/conversation_2.flac");
 
 if __name__ == "__main__":
     main()
