@@ -28,7 +28,7 @@ def transcribe_file(speech_file):
     from google.cloud import speech
     from google.cloud.speech import enums
     from google.cloud.speech import types
-    print("starting")
+    #print("starting")
     client = speech.SpeechClient()
 
     # [START migration_async_request]
@@ -47,20 +47,53 @@ def transcribe_file(speech_file):
     operation = client.long_running_recognize(config, audio)
     # [END migration_async_request]
 
-    print('Waiting for operation to complete...')
+    #print('Waiting for operation to complete...')
     response = operation.result(timeout=90)
-    print(operation.metadata())
-    # Print the first alternative of all the consecutive results.
+    #print(operation.metadata())
+    
     #i = 0;
+    transcriptMap = []
     for result in response.results:
-        print('Transcript: {}'.format(result.alternatives[0].transcript))
-        print('Confidence: {}'.format(result.alternatives[0].confidence))
-        #words = result.alternatives[0].words
-        #for i in range(0,len(words)):
-        #    print(words[i].word)
-        #    print(words[i].start_time)
+        words = result.alternatives[0].words
+        
+        tempList = [(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos))),(result.alternatives[0].transcript),speech_file]
+        transcriptMap.append(tempList)
+    return (transcriptMap)
+
+    transcript_file.close()
     # [END migration_async_response]
 # [END def_transcribe_file]
+
+def transcriptMerge2(transcriptMap):
+    retList = []
+    indices = []
+    tempLowValue = []
+    lowValue = 0 
+    lowIndex = 0
+    chunkLen = 0
+    for list in transcriptMap:
+        chunkLen = chunkLen + len(list)
+        indices.append(0)
+        tempLowValue.append(float('inf'))
+    for i in range(0,chunkLen):
+        for j in range(0,len(transcriptMap)):
+            
+            tempLowValue[j] = list[indices[j]][j]
+        print(tempLowValue)            
+        minValue = min(tempLowValue)
+        minIndex = tempLowValue.index(minValue)
+        print(minIndex)
+        indices[j] = indices[j] + 1
+        retList.append(list[minIndex])
+    return retList
+
+
+def transcriptMerge(transcriptMap):
+    return sorted(transcriptMap, key = lambda transcriptmap: transcriptmap[0])
+def printToTranscript(mergedTranscriptMap, fileName, pathName):
+    transcript_file = open(str(pathName+fileName),"a")    
+    for chunk in mergedTranscriptMap:
+        transcript_file.write(str(chunk[2]+": "+chunk[1]+"\n"))
 
 def main():
     from googleapiclient.discovery import build
@@ -68,10 +101,16 @@ def main():
     credentials = GoogleCredentials.get_application_default()
     service = build('compute', 'v1', credentials=credentials)
 
-    #transcribe_gcs("gs://cloud-samples-tests/speech/brooklyn.flac")
-    transcribe_file("../test_audio_files/test_audio_2_mono.flac");
-    #transcribe_file("../test_audio_files/conversation_1.flac");
-    #transcribe_file("../test_audio_files/conversation_2.flac");
+    files = {"../test_audio_files/conversation_1.flac" , "../test_audio_files/conversation_2.flac"}
+    transcriptMap = []
+    
+    for file in files:
+        transcriptMap = transcriptMap + transcribe_file(file)
+
+    file_name = "transcript.txt"
+    path_name = "../transcripts/"
+    printToTranscript(transcriptMerge(transcriptMap),file_name, path_name)
+    
 
 if __name__ == "__main__":
     main()
