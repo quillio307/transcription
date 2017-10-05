@@ -52,7 +52,6 @@ def transcribe_file(speech_file):
     #print(operation.metadata())
     
     #i = 0;
-    transcript_file = open("../transcripts/transcript.txt","a")       
     transcriptMap = []
     for result in response.results:
         words = result.alternatives[0].words
@@ -63,7 +62,7 @@ def transcribe_file(speech_file):
         #print(words[0].start_time)
         #for i in range(0,len(words)):
             #print(words[i].word)
-        tempList = [(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos))),(result.alternatives[0].transcript)]
+        tempList = [(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos))),(result.alternatives[0].transcript),speech_file]
         transcriptMap.append(tempList)
     return (transcriptMap)
 
@@ -71,7 +70,7 @@ def transcribe_file(speech_file):
     # [END migration_async_response]
 # [END def_transcribe_file]
 
-def transcriptMerge(transcriptMap):
+def transcriptMerge2(transcriptMap):
     retList = []
     indices = []
     tempLowValue = []
@@ -81,19 +80,28 @@ def transcriptMerge(transcriptMap):
     for list in transcriptMap:
         chunkLen = chunkLen + len(list)
         indices.append(0)
-    for i in range(0,chunkLen):
         tempLowValue.append(float('inf'))
     for i in range(0,chunkLen):
         for j in range(0,len(transcriptMap)):
-            print(len(indices))
-            print(indices)
-            print(j)
-            tempLowValue[j] = list[indices[j]][0]
+            #print(len(indices))
+            #print(indices)
+            #print(j)
+            tempLowValue[j] = list[indices[j]][j]
+        print(tempLowValue)            
         minValue = min(tempLowValue)
         minIndex = tempLowValue.index(minValue)
+        print(minIndex)
         indices[j] = indices[j] + 1
         retList.append(list[minIndex])
     return retList
+
+
+def transcriptMerge(transcriptMap):
+    return sorted(transcriptMap, key = lambda transcriptmap: transcriptmap[0])
+def printToTranscript(mergedTranscriptMap, fileName, pathName):
+    transcript_file = open(str(pathName+fileName),"a")    
+    for chunk in mergedTranscriptMap:
+        transcript_file.write(str(chunk[2]+": "+chunk[1]+"\n"))
 
 def main():
     from googleapiclient.discovery import build
@@ -107,12 +115,15 @@ def main():
     transcriptMap = []
     #TMsize = 0
     for file in files:
-        transcriptMap.append(transcribe_file(file))
+        transcriptMap = transcriptMap + transcribe_file(file)
 
         #TMsize = TMsize + 1
     #print(transcriptMap[0][0][0])
-    mergedTranscriptMap = transcriptMerge(transcriptMap)
-    print(mergedTranscriptMap)
+    #mergedTranscriptMap = transcriptMerge(transcriptMap)
+    file_name = "transcript.txt"
+    path_name = "../transcripts/"
+    printToTranscript(transcriptMerge(transcriptMap),file_name, path_name)
+    #print(transcriptMap)
 
 if __name__ == "__main__":
     main()
