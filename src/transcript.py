@@ -28,7 +28,7 @@ def transcribe_file(speech_file):
     from google.cloud import speech
     from google.cloud.speech import enums
     from google.cloud.speech import types
-    print("starting")
+    #print("starting")
     client = speech.SpeechClient()
 
     # [START migration_async_request]
@@ -47,18 +47,27 @@ def transcribe_file(speech_file):
     operation = client.long_running_recognize(config, audio)
     # [END migration_async_request]
 
-    print('Waiting for operation to complete...')
+    #print('Waiting for operation to complete...')
     response = operation.result(timeout=90)
-    print(operation.metadata())
-    # Print the first alternative of all the consecutive results.
+    #print(operation.metadata())
+    
     #i = 0;
+    transcript_file = open("../transcripts/transcript.txt","a")       
+    transcriptMap = {}
     for result in response.results:
-        print('Transcript: {}'.format(result.alternatives[0].transcript))
-        print('Confidence: {}'.format(result.alternatives[0].confidence))
         words = result.alternatives[0].words
-        for i in range(0,len(words)):
-            print(words[i].word)
-            print(words[i].start_time)
+        #print(result.alternatives[0].transcript)
+        #print(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos)))
+        # transcript_file.write(result.alternatives[0].transcript+"\n")
+        # print(result.alternatives[0].confidence)
+        #print(words[0].start_time)
+        #for i in range(0,len(words)):
+            #print(words[i].word)
+        transcriptMap[(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos)))] = (result.alternatives[0].transcript)
+
+    return (transcriptMap)
+
+    transcript_file.close()
     # [END migration_async_response]
 # [END def_transcribe_file]
 
@@ -68,10 +77,15 @@ def main():
     credentials = GoogleCredentials.get_application_default()
     service = build('compute', 'v1', credentials=credentials)
 
-    #transcribe_gcs("gs://cloud-samples-tests/speech/brooklyn.flac")
-    
-    transcribe_file("../test_audio_files/conversation_1.flac");
-    transcribe_file("../test_audio_files/conversation_2.flac");
+    files = {"../test_audio_files/conversation_1.flac" , "../test_audio_files/conversation_2.flac"}
+    #transcribe_file("../test_audio_files/conversation_1.flac");
+    #transcribe_file("../test_audio_files/conversation_2.flac");
+    transcriptMap = []
+    #TMsize = 0
+    for file in files:
+        transcriptMap.append(transcribe_file(file)) #NOW I NEEDA FUCKING MERGE THE TWO THING BASED ON TIMESTAMPS
+        #TMsize = TMsize + 1
+    print(transcriptMap)
 
 if __name__ == "__main__":
     main()
