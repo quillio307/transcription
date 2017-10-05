@@ -55,13 +55,7 @@ def transcribe_file(speech_file):
     transcriptMap = []
     for result in response.results:
         words = result.alternatives[0].words
-        #print(result.alternatives[0].transcript)
-        #print(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos)))
-        # transcript_file.write(result.alternatives[0].transcript+"\n")
-        # print(result.alternatives[0].confidence)
-        #print(words[0].start_time)
-        #for i in range(0,len(words)):
-            #print(words[i].word)
+        
         tempList = [(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos))),(result.alternatives[0].transcript),speech_file]
         transcriptMap.append(tempList)
     return (transcriptMap)
@@ -83,9 +77,7 @@ def transcriptMerge2(transcriptMap):
         tempLowValue.append(float('inf'))
     for i in range(0,chunkLen):
         for j in range(0,len(transcriptMap)):
-            #print(len(indices))
-            #print(indices)
-            #print(j)
+            
             tempLowValue[j] = list[indices[j]][j]
         print(tempLowValue)            
         minValue = min(tempLowValue)
@@ -110,20 +102,15 @@ def main():
     service = build('compute', 'v1', credentials=credentials)
 
     files = {"../test_audio_files/conversation_1.flac" , "../test_audio_files/conversation_2.flac"}
-    #transcribe_file("../test_audio_files/conversation_1.flac");
-    #transcribe_file("../test_audio_files/conversation_2.flac");
     transcriptMap = []
-    #TMsize = 0
+    
     for file in files:
         transcriptMap = transcriptMap + transcribe_file(file)
 
-        #TMsize = TMsize + 1
-    #print(transcriptMap[0][0][0])
-    #mergedTranscriptMap = transcriptMerge(transcriptMap)
     file_name = "transcript.txt"
     path_name = "../transcripts/"
     printToTranscript(transcriptMerge(transcriptMap),file_name, path_name)
-    #print(transcriptMap)
+    
 
 if __name__ == "__main__":
     main()
