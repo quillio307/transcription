@@ -53,7 +53,7 @@ def transcribe_file(speech_file):
     
     #i = 0;
     transcript_file = open("../transcripts/transcript.txt","a")       
-    transcriptMap = {}
+    transcriptMap = []
     for result in response.results:
         words = result.alternatives[0].words
         #print(result.alternatives[0].transcript)
@@ -63,13 +63,32 @@ def transcribe_file(speech_file):
         #print(words[0].start_time)
         #for i in range(0,len(words)):
             #print(words[i].word)
-        transcriptMap[(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos)))] = (result.alternatives[0].transcript)
-
+        tempList = [(float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos))),(result.alternatives[0].transcript)]
+        transcriptMap.append(tempList)
     return (transcriptMap)
 
     transcript_file.close()
     # [END migration_async_response]
 # [END def_transcribe_file]
+
+def transcriptMerge(transcriptMap):
+    retList = []
+    indices = []
+    tempLowValue = []
+    lowValue = 0 
+    lowIndex = 0
+    chunkLen = 0
+    for list in transcriptMap:
+        chunkLen = chunkLen + len(list)
+        indices.append(0)
+    for i in range(0,chunkLen):
+        for j in range(0,chunkLen):
+            tempLowValue[j] = list[indices[j]][0]
+        minValue = min(tempLowValue)
+        minIndex = tempLowValue.index(minValue)
+        indices[j] = indices[j] + 1
+        retList.append(list[minIndex])
+    return retList
 
 def main():
     from googleapiclient.discovery import build
@@ -83,9 +102,12 @@ def main():
     transcriptMap = []
     #TMsize = 0
     for file in files:
-        transcriptMap.append(transcribe_file(file)) #NOW I NEEDA FUCKING MERGE THE TWO THING BASED ON TIMESTAMPS
+        transcriptMap.append(transcribe_file(file))
+
         #TMsize = TMsize + 1
-    print(transcriptMap)
+    #print(transcriptMap[0][0][0])
+    mergedTranscriptMap = transcriptMerge(transcriptMap)
+    print(mergedTranscriptMap)
 
 if __name__ == "__main__":
     main()
