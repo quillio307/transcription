@@ -55,10 +55,10 @@ def transcribe_file(speech_file):
     for result in response.results:
         print('Transcript: {}'.format(result.alternatives[0].transcript))
         print('Confidence: {}'.format(result.alternatives[0].confidence))
-        #words = result.alternatives[0].words
-        #for i in range(0,len(words)):
-        #    print(words[i].word)
-        #    print(words[i].start_time)
+        words = result.alternatives[0].words
+        for i in range(0,len(words)):
+            print(words[i].word)
+            print(words[i].start_time)
     # [END migration_async_response]
 # [END def_transcribe_file]
 
@@ -69,9 +69,9 @@ def main():
     service = build('compute', 'v1', credentials=credentials)
 
     #transcribe_gcs("gs://cloud-samples-tests/speech/brooklyn.flac")
-    transcribe_file("../test_audio_files/test_audio_2_mono.flac");
-    #transcribe_file("../test_audio_files/conversation_1.flac");
-    #transcribe_file("../test_audio_files/conversation_2.flac");
+    
+    transcribe_file("../test_audio_files/conversation_1.flac");
+    transcribe_file("../test_audio_files/conversation_2.flac");
 
 if __name__ == "__main__":
     main()
