@@ -82,7 +82,12 @@ def transcriptMerge(transcriptMap):
         chunkLen = chunkLen + len(list)
         indices.append(0)
     for i in range(0,chunkLen):
-        for j in range(0,chunkLen):
+        tempLowValue.append(float('inf'))
+    for i in range(0,chunkLen):
+        for j in range(0,len(transcriptMap)):
+            print(len(indices))
+            print(indices)
+            print(j)
             tempLowValue[j] = list[indices[j]][0]
         minValue = min(tempLowValue)
         minIndex = tempLowValue.index(minValue)
