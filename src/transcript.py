@@ -105,7 +105,7 @@ def main():
     credentials = GoogleCredentials.get_application_default()
     service = build('compute', 'v1', credentials=credentials)
 
-    files = {"../test_audio_files/conversation_1.flac" , "gs://quillio_audio_files/Job_Interview.flac" , "../test_audio_files/conversation_2.flac"}
+    files = {"gs://quillio_audio_files/longconversation_1.flac" ,"gs://quillio_audio_files/longconversation_2.flac"} #, "gs://quillio_audio_files/Job_Interview.flac" , 
     transcriptMap = []
     
     for file in files:
