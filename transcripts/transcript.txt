@@ -1,6 +1,18 @@
+gs://quillio_audio_files/Job_Interview.flac: well it's Sunday afternoon about 20 after 4 I'm obviously bored and I figured I'd try out this high-tech podcasting
 ../test_audio_files/conversation_1.flac: I'm really random having a conversation with myself
 ../test_audio_files/conversation_2.flac: yes you are very weird
 ../test_audio_files/conversation_1.flac:  what's the date
 ../test_audio_files/conversation_2.flac:  it's October 4th
 ../test_audio_files/conversation_1.flac:  what's the time
 ../test_audio_files/conversation_2.flac:  it's 6:54
+gs://quillio_audio_files/Job_Interview.flac:  just me and the dog in the house
+gs://quillio_audio_files/Job_Interview.flac:  I know it's Sunday afternoon but Rob's actually out at a job interview this is kind of fortuitous they are doing the interview today put into four candidates after the interviews today they'll be down to two and out of those two they're going to have a phone interview with the American at office of this company and they're planning on having a job offer to the final candidate by Friday of this week
+gs://quillio_audio_files/Job_Interview.flac:  oh that would make me so happy just to have this uncertainty gone
+gs://quillio_audio_files/Job_Interview.flac:  I'm I'm trying to be as supportive as I can and I don't say much about that you know what I'm worried about the the money because as of the 14th he's out of a job and we sure as hell can't live on my money alone
+gs://quillio_audio_files/Job_Interview.flac:  but he's out in his spiffy Suit & Tie while and I'm not going to bed I hope he did a list of his job accomplishments kind of extra then you would see on a on a resume taking the points on a resume and expanding them so he can walk in and he can tell them yes not only can I do this job I have done this job and I'm damn good at this job that's my advice to him and he took it it was my suggestion that he make this list
+gs://quillio_audio_files/Job_Interview.flac:  so the interview was at 4 its 4:23
+gs://quillio_audio_files/Job_Interview.flac:  when he comes home will grab a bite to eat and then I've got a hockey game
+gs://quillio_audio_files/Job_Interview.flac:  but this week is going to be pins and needles hoping many makes that final two and then really hoping he becomes up final candidate
+gs://quillio_audio_files/Job_Interview.flac:  so this is a podcast and I guess this is what a crazy lady sounds like
+gs://quillio_audio_files/Job_Interview.flac:  tsunami like shrieking and yelling and sending a little well crazy well I guess it's a wolf in sheep's clothing he can't really trust what you hear now can you
+gs://quillio_audio_files/Job_Interview.flac:  I hope everybody else is okay and hope there are getting the good weather we are and I'm going to go off and be bored again that's me
