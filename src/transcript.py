@@ -32,10 +32,13 @@ def transcribe_file(speech_file):
     client = speech.SpeechClient()
 
     # [START migration_async_request]
-    with io.open(speech_file, 'rb') as audio_file:
-        content = audio_file.read()
-
-    audio = types.RecognitionAudio(content=content)
+    if speech_file[:5] == "gs://":
+        audio = types.RecognitionAudio(uri=speech_file)
+    else:
+        with io.open(speech_file, 'rb') as audio_file:
+            content = audio_file.read()
+        audio = types.RecognitionAudio(content=content)
+    
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.FLAC,
         sample_rate_hertz=44100,
@@ -90,8 +93,9 @@ def transcriptMerge2(transcriptMap):
 
 def transcriptMerge(transcriptMap):
     return sorted(transcriptMap, key = lambda transcriptmap: transcriptmap[0])
+
 def printToTranscript(mergedTranscriptMap, fileName, pathName):
-    transcript_file = open(str(pathName+fileName),"a")    
+    transcript_file = open(str(pathName+fileName),"w")    
     for chunk in mergedTranscriptMap:
         transcript_file.write(str(chunk[2]+": "+chunk[1]+"\n"))
 
@@ -101,7 +105,7 @@ def main():
     credentials = GoogleCredentials.get_application_default()
     service = build('compute', 'v1', credentials=credentials)
 
-    files = {"../test_audio_files/conversation_1.flac" , "../test_audio_files/conversation_2.flac"}
+    files = {"../test_audio_files/conversation_1.flac" , "gs://quillio_audio_files/Job_Interview.flac" , "../test_audio_files/conversation_2.flac"}
     transcriptMap = []
     
     for file in files:
