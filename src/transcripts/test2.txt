@@ -1,0 +1,142 @@
+anoop: hello
+anoop:  see that it'll it'll register that is one chunk but like if I keep talking it's going to register like everything that I'm saying now is one chunk
+anoop:  and every time it's been said 0 like I just my way of knowing that the recent of a jump so like if you have multiple people talking like it's like I'm envisioning it like one person will talk talk talk talk right and then they'll shut up other person talks and during that time the outdoor them will like upload that to the transcript for to the documents are like as soon as somebody stops talking
+anoop:  now I can put into the transfer file and then like it'll happen like a multiple people write talking in one video chat will all point to the same transfer file and it'll keep ending to that you're not in real time as people start and stop talking
+anoop:  so but there can't be back I just like intentionally not being back or noise when somebody's I'm talking to a certain extent are you able to Output the chunks as they come back and said the zero is that possible
+anoop: hello
+anoop:  yeah so it's pretty much everything right now but like if you have a big chunk and you ask it to print at all like what I shut up it'll print it
+anoop:  but like every time so right now the only problem is like this all these are messages get print out every single time to stream restarts but besides that there's no lag first of all like the code bases in going to be exact but okay
+anoop:  yeah so what did we decide last time the last meeting where we were still good with doing the intercom separate Mike's right okay then I'll have to do is put this in JavaScript and everyone has their own Street money you got her and all I needs to happen is that the endpoint is the same so we're restoring the transcript
+anoop: yeah I mean that's at the end of the meeting is going to be stored locally and then did everyone have their own Ledger in those ledgers get emerged so I still all I need to change okay I thought it was going to be a pending in real time but then what's the point is
+anoop:  but then what's the point of streaming this weekend like actually see it on the screen and real time
+anoop:  32c like the feature is just like to see it pop up on the screen as it go I know but that doesn't everybody has to see it pop up on the screen as we go right so like right now I would essentially the the way the division structure right now is like I can
+anoop:  one client wants to get to request a response from DST that he can like broadcast and everyone else we could on their screen just like a normal chat application so you're saying like the live transcript portion is separate from the transcript that is generated
+anoop: on streamlining how is everyone else going to sit on their screen the reason I said that is
+anoop:  yeah that's what I mean
+anoop:  so like
+anoop:  yes is going to get up with at the end together but like
+anoop:  okay I see what you mean
+anoop:  your dad I don't want to make a right call to Mongo every single time we have any chunk because that's just going to give me really slow
+anoop:  that's why I like I wanted to give you a small already slow
+anoop:  is not the number like it's not the size of the right it's just the fact that you're initiating a right way it's kind of like a system call Rite Aid spensive does it that's why I kind of like an August like buffering if that makes sense right make sense right is just I mean honestly like we're not right even crazy application I know but like it just it if we make the design choices
+anoop: so then in order to get it on the screen immediately if you want to create an application right now
+anoop:  but then so but once we've hit the end button and meeting that everyone else is like Ledger's with the times that we do a synchronous for that part because the streaming because
+anoop:  but I thought cuz we want the live updates right on the screen I know where that's going to be separate so like
+anoop:  the live updates will God will come based on this text right or get output at will get sent through the socket like as a part of the chat and then this happened algorithm that I like okay I've gotten something put it into the on-screen right yeah so then like why don't we after that like when the meeting when you pretend like a full transcript is generated from the asynchronous
+anoop:  like I said
+anoop: banana
+anoop:  are you saying you'd like the transcript will just become Larry sing like the live update transferable just become the final transcript again yes the live update we don't need to buy anything at the end
+anoop:  weather
+anoop:  where's the header so
+anoop:  weather so I say something right it hits the client The Client First goes back with some text right across the board when this is required okay that's like universe
+anoop: so that's what I heard from you say
+anoop:  that is broadcast
+anoop:  hey where you at right now
+anoop:  but that's after we get the truck back from GMC and this gets sent out the client client here and then right so and this is specifically on the screen
+anoop:  right right
+anoop:  and then like so I'll have like B1 B2 B3 and I have a 1A 2A
+anoop: and then I have not only does on the screens out of the trunk and then once I have the separate letters to send that to you get some as we're going to the
+anoop:  text me why don't you just convert that into a so like as if you have like Mike
+anoop:  right and you have like the document right yeah and you like a full thing and like I was going to come today do you want me to do whatever for her
+anoop:  this is during the meeting but when you press and right why don't you just like send this right to survive your final transcript because everyone's client like everyone's Klein screen is different if you weren't sitting at that document it's not the same document that makes sense because it's just synchronize I want everyone else's clients like I'm just having to send the right messages the right time so that's in that order
+anoop: it's not like livestock hoping it doesn't live up here and listen the clients
+anoop:  is it bad I don't get that
+anoop:  yeah and you know what the fuc
+anoop:  even so and like we're also kind of saying the same thing yeah because we all have our own personal Ledger like either gets immersion real-time it like we're just keeping a Time sound like this is might like this person responsible for their own shock like a big issue like that client and then those all then if you're right okay I guess that's okay then
+anoop: getting ready to be like in JavaScript
+anoop:  closet library
+anoop:  hey I got this this way so we can keep your merch code that you have for the first friend here I'm going to change this card. Okay so first I need to make it so that it prints out to the screen yet can you also print so you're printing the text result is final
+anoop:  right now all I'm responding to the screen and also printing to a fire locally so that's what he want and yeah I know what were you getting transferred from
+anoop:  I just like the first ultrasound
+anoop: was this week this weekend so yeah it is   
+anoop:  one stop
+anoop:  get fucked up oh I know what that pull up cuz I print this I don't want this
+anoop: hello yeah so like if it'll it'll try to
+anoop:  who is it'll it'll print until he realizes that its final and then when it realizes that it's finally to print it as a lie that's fine 
+anoop:  it's slightly fucked up. That's okay I didn't want that though I wanted
+anoop:  so if you go to Alternatives word in words and then start time start time in Ed like could you sprint the start time and end time for the trunk
+anoop:  yeah Peter for the start time of the first word in the trunk that in the end time of the last one in the trunk so we get an intro like this chunk spend this amount of time full time has is not what you used it for your merging 
+anoop: that time of the first word of exactly are qrq
+anoop:  oh I totally forgot to make our logo with the stack you should I do that oh no I don't like that
+anoop:  I mean I feel like every useful I like that 
+anoop:  through anyone display cool yo it's my location        
+anoop:  yeah
+anoop:  we are delete them
+anoop:  okay I'm so since Textra is bitch if to change the way we do our weekly reports on your team ones so like
+anoop: don't make any sense why I don't you have Commit IDs why do you have committed ID here   
+anoop:  what's happening as I write for the reports I usually list on meetings
+anoop:  I don't think any ladies cuz most of the time we don't on the one a couple that I did yeah there's Word document commissions and stuff like that and he was like well you need to put individual like mouses
+anoop:  so we need to commit IDs from stuff with me, so I guess just like you accomplished something significant and on a date of it out and I'll rather have a Kentucky.
+anoop:  Yeah real fast in his email Kentucky
+anoop: healthy we didn't take as long as         
+anoop:  is why I like 5 page essay per week on under contract so we can finish your project impact our project was a 5 page essay April 26th somebody else already accepted into that contract by Texas hours                  
+anoop: for like 3 hours that's pretty standard 1.1
+anoop:  2005 Lexus 14.1
+anoop:  is there a quiet room 18.7
+anoop:  hello 28.8
+anoop:  hello 31.0
+anoop:  yo 33.1
+anoop:  somebody tell me a sentence that's not weird 35.9
+anoop:  what the fuck is up Kyle 40.1
+anoop:  what the fuc 49.0
+anoop: I can't believe in so that would have been lit 0.0
+anoop:  did you say I love you 12.4
+anoop:  words 20.6
+anoop:  I'm retarded 25.7
+anoop:  I literally have to walk around the building in order to debug 28.5
+anoop:  yeah I really how it is 33.6
+anoop:  it's so lit right now 37.8
+anoop:  again wonder what am I doing with my life I'm walking around talking to a yoga 40.1
+anoop:  yo fish it's trying to fuck up 47.0
+anoop: yo 1.0
+anoop: hello 0.61
+anoop: hello 1.21
+anoop:  hello 58.11
+anoop: hello hello 58.91
+anoop:  hello 64.21
+anoop:  triamor 76.11
+anoop:  so right now I just haven't pointing out 90.81
+anoop:  the starting time of perfect offset from what time when I start the spring so if the stream restarts that I will 108.11
+anoop:  because Brianna for that perfect so we will start all the stream at the same time with the socket stuff that he same time it's also told me that's fine if that's something very important to the script or something if that's a better way to implemented 143.51
+anoop:  I guess what we could also do is as soon as one person we can also not only have offsets these are 200.81
+anoop: so we can have individual requests object offsets that makes sense so like fight like four different clients right once already one person person to start meeting right it says that to everyone this person probably already seen the request button and I will get logged whoever said that first will get loud as the first time in the database and then each one Wednesday all Press Start and that's your screens are starting but everyone also have the personal offset then once we emerge them we will add the personal offset first day out offset with the word offset 200.81
+anoop:  smart that works too 236.11
+anoop:  individually or some shit like that's fine 90% yeah 280.51
+anoop: there's a museum of ice cream in San Francisco as I can swing that iconic over there 290.61
+anoop:  my friend just posted a pic of her on the on the swing did they get the word wall 308.81
+anoop:  it's like a it's like a wall there that has like words on it that like make the magnet magnet letters 336.61
+anoop:  anime words out of it 372.51
+anoop:  ignition 416.40999999999997
+anoop:  is this the swing 466.01
+anoop:  what's hanging from the ceiling for bananas 523.01
+anoop:  banana 583.41
+anoop: is writing is going to come fix your test now cuz I just have an occasion to know how to make an incognito window and this window 595.2099999999999
+anoop:  this is the picture of Daniel 619.7099999999999
+anoop:  the picture you described in earlier 649.2099999999999
+anoop:  yeah so going this is pretty cool 685.0099999999999
+anoop:  Charlie's leg fell asleep 728.4099999999999
+anoop:  and 728 seconds 776.8099999999998
+anoop:  Charlie's like fell asleep 829.8099999999998
+anoop:  the Jews did this 885.1099999999998
+anoop:  Hitler did nothing wrong 945.9099999999997
+anoop: all of this is getting associated with our account so when I feel like this conversation happened to buy the idea no no maybe the name 949.6099999999998
+anoop:  we don't have a domain yeah oh speaking of which have coupon 984.3099999999998
+anoop:  Julio. I truly had a GD 1035.61
+anoop:  polio. Ed Sheeran 1094.61
+anoop:  Give me a few 1157.01
+anoop: well I don't know how to do this would be 1160.11
+anoop:  medical lab 1167.4099999999999
+anoop: function below 0.01
+anoop:  yeah I don't know how to do this 4.109999999999999
+anoop:  twilio XYZ 14.91
+anoop:  there's a quilt that I owe but that's $59 28.21
+anoop:  per month 48.81
+anoop: we really that cool though 0.0
+anoop:  $30 49 10.0
+anoop:  is that just don't mean 22.3
+anoop:  we're doing the 36.7
+anoop:  I need a hosting is that in my domain and then 55.300000000000004
+anoop:  oh yeah if it's your name 85.0
+anoop:  but I see your name I'm going to be because I don't know, I mean Pikachu 118.2
+anoop:  True Value 99 Chevrolet Cavalier 159.7
+anoop: okay so how do we integrate these two things 159.7
