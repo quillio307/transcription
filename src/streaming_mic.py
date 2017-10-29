@@ -38,6 +38,7 @@ from six.moves import queue
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
+TIME = 0.00
 
 a = 5
 
@@ -119,6 +120,7 @@ def listen_print_loop(responses,userid,filename):
     the next result to overwrite it, until the response is a final one. For the
     final one, print a newline to preserve the finalized transcription.
     """
+    global TIME
     num_chars_printed = 0
     print("fucking suh dude")
     for response in responses:
@@ -135,8 +137,10 @@ def listen_print_loop(responses,userid,filename):
         # Display the transcription of the top alternative.
         transcript = result.alternatives[0].transcript
         words = result.alternatives[0].words
+        #print(len(words))
+        TIME  = TIME + float(str(words[0].start_time.seconds)+"."+str(words[0].start_time.nanos))
+        #words = result.alternatives[0].words
         #time = words[0].start_time.nanos
-        print(len(words))
 
         # Display interim results, but with a carriage return at the end of the
         # line, so subsequent lines will overwrite them.
@@ -152,8 +156,9 @@ def listen_print_loop(responses,userid,filename):
             num_chars_printed = len(transcript)
 
         else:
-            line = userid+": "+transcript + overwrite_chars + "\n"
+            line = str(userid+": "+transcript + " "+str(TIME)+overwrite_chars + "\n")
             printToTranscript(filename,line)
+            print(str(line))
 
             # Exit recognition if any of the transcribed phrases could be
             # one of our keywords.
@@ -179,21 +184,21 @@ def main():
         print("arguments incorrect --- argument should be user ID of current user followed by pathname for transcript file")
         exit
 
-    userid = sys.argv[1] 
+    userid = sys.argv[1]
     filename = sys.argv[2]
 
     client = speech.SpeechClient()
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=RATE,
-        language_code=language_code)
+        language_code=language_code,
+        enable_word_time_offsets=1)
     streaming_config = types.StreamingRecognitionConfig(
         config=config,
         interim_results=False)
 
-    
+
     while a == 5:
-        print(a)
         with MicrophoneStream(RATE, CHUNK) as stream:
             audio_generator = stream.generator()
             requests = (types.StreamingRecognizeRequest(audio_content=content)
@@ -203,9 +208,9 @@ def main():
             # Now, put the transcription responses to use.
             print("fucking fuck shit fuck")
             try:
-	            listen_print_loop(responses,userid,filename)
+                listen_print_loop(responses,userid,filename)
             except Exception as e:
-	            stream = MicrophoneStream(RATE,CHUNK)
+	               stream = MicrophoneStream(RATE,CHUNK)
 
 
 if __name__ == '__main__':
