@@ -44,7 +44,12 @@ def transcribe_file(speech_file):
         sample_rate_hertz=44100,
         language_code='en-US',
         max_alternatives=16,
-        enable_word_time_offsets=1)
+        enable_word_time_offsets=1,
+	speech_contexts=[
+		{
+			speech.SpeechContext(phrases=["hello","talking","sprint review"])
+		}
+	])
 
     # [START migration_async_response]
     operation = client.long_running_recognize(config, audio)
