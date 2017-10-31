@@ -7,24 +7,105 @@
 
 <h1>My First Heading</h1>
 <p>My first paragraph.</p>
-
+<audio id="player" controls></audio>
 </body>
-<script type="text/javascript">
-	// Create WebSocket connection.
-const socket = new WebSocket('ws://localhost:5000/echo');
-console.log("Hello");
-// Connection opened
-socket.addEventListener('open', function (event) {
-    socket.send('Hello Server!');
-});
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
 
-// Listen for messages
-socket.addEventListener('message', function (event) {
-    console.log('Message from server ', event.data);
-});
+//     // Create WebSocket connection.
+// const socket = new WebSocket('ws://localhost:5000/echo');
+// console.log("Hello");
+// // Connection opened
+// socket.addEventListener('open', function (event) {
+//     socket.send('Hello Server!');
+// });
 
-socket.addEventListener('close', function (event) {
-    console.log("Bye Server!");
+// // Listen for messages
+// socket.addEventListener('message', function (event) {
+//     console.log('Message from server ', event.data);
+// });
+
+// socket.addEventListener('close', function (event) {
+//     console.log("Bye Server!");
+// });
+navigator.mediaDevices.enumerateDevices().then((devices) => {
+  console.log(devices);
 });
+/*
+var mediaRecorder;
+var mediaStream;
+var handleSuccess = function(stream) {
+	console.log("Got stream.")
+        mediaStream = stream;
+        console.log(stream);
+        const options = {mimeType: 'audio/webm'};
+        mediaStream.getAudioTracks()[0].enabled = true;
+        mediaRecorder= new MediaRecorder(stream, options);
+        console.log(mediaRecorder);
+        mediaRecorder.addEventListener('dataavailable', function(e) {
+        	console.log(e);
+	                  //socket.send(e.data);
+	          if (e.data.size > 0) {
+
+	              //if(mic_toggle){
+	              	console.log(e.data);
+	                 // socket.send(e.data);
+	              //}else{
+	                  //recordedChunks.push(e.data.size)
+	              //}
+	          }
+        });
+
+        mediaRecorder.onerror = function(event) {
+		    let error = event.error;
+
+		    switch(error.name) {
+		      case InvalidStateError:
+		        showNotification("You can't record the video right " +
+		                         "now. Try again later.");
+		        break;
+		      case SecurityError:
+		        showNotification("Recording the specified source " +
+		                         "is not allowed due to security " +
+		                         "restrictions.");
+		        break;
+		      default:
+		        showNotification("A problem occurred while trying " +
+		                         "to record the video.");
+		        break;
+		    }
+		  };
+
+        mediaRecorder.addEventListener('stop', function() {
+            saveData(new Blob(recordedChunks), "meeting_audio"+new Date()+".wav");
+        });
+
+    };
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+      //mediaStream.getAudioTracks()[0].enabled = true;*/
+
+      var handleSuccess = function(stream) {
+    var context = new AudioContext();
+    var source = context.createMediaStreamSource(stream);
+    var processor = context.createScriptProcessor(1024, 1, 1);
+
+    source.connect(processor);
+    processor.connect(context.destination);
+
+    processor.onaudioprocess = function(e) {
+      // Do something with the data, i.e Convert this to WAV
+      console.log("Chunk");
+    };
+  };
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+});
+	
 </script>
 </html>
