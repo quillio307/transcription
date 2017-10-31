@@ -17,7 +17,13 @@
 $(document).ready(function(){
 
 //     // Create WebSocket connection.
-// const socket = new WebSocket('ws://localhost:5000/echo');
+const socket = new WebSocket('ws://localhost:5000');
+socket.addEventListener('open', function (event) {
+    socket.send('Hello Server!');
+});
+socket.addEventListener('message', function (event) {
+     console.log('Message from server: ', event.data);
+});
 // console.log("Hello");
 // // Connection opened
 // socket.addEventListener('open', function (event) {

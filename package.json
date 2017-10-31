@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/quillio307/transcription#readme",
   "dependencies": {
-    "@google-cloud/speech": "^0.10.3"
+    "@google-cloud/speech": "^0.10.3",
+    "ws": "^3.2.0"
   }
 }
