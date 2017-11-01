@@ -1,0 +1,23 @@
+{
+  "name": "transcription",
+  "version": "1.0.0",
+  "description": "Use Google Speech to Text API to convert audio files into text transcripts.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quillio307/transcription.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quillio307/transcription/issues"
+  },
+  "homepage": "https://github.com/quillio307/transcription#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^0.10.3",
+    "ws": "^3.2.0"
+  }
+}
