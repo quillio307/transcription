@@ -22,7 +22,7 @@
 $(document).ready(function(){
 var context = new AudioContext();
 //     // Create WebSocket connection.
-const socket = new WebSocket(`ws://localhost:5000/?sampRate=${context.sampleRate}`);
+const socket = new WebSocket(`ws://quillio-ws-st.herokuapp.com/?sampRate=${context.sampleRate}`);
 socket.addEventListener('open', function (event) {
     socket.send('Hello Server!');
 });
