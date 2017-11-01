@@ -20,7 +20,7 @@ const languageCode = 'en-US';
 
 
 const wss = new WebSocket.Server({
-	port: 5000
+	port: process.env.PORT
 });
 
 wss.on('connection', function connection(ws, req) {
@@ -51,24 +51,29 @@ wss.on('connection', function connection(ws, req) {
 		recognizeStream.write(message);
 	});
 
+	ws.on('close', function (code, reason) {
+		process.stdout.write("Client connection closed\n");
+	});
+
+	ws.on('error', function (e) {
+		process.stdout.write(`Socket error:\n${e}\n`);
+		ws.terminate();
+	});
+
 	function initStream() {
 		recognizeStream = speech.streamingRecognize(request)
 			.on('error', (err) => {
 				console.log(err);
-				console.log("Starting new stream")
+				console.log("Starting new stream\n")
 				initStream();
 			})
 			.on('data', (data) => {
 				try{
 					ws.send(JSON.stringify(data.results));	
 				}catch(e){
-					process.stdout.write("Client send error");
+					process.stdout.write("Client send error\n");
 					if(ws.isAlive === false) ws.terminate();
 				}
-				process.stdout.write(
-					(data.results[0] && data.results[0].alternatives[0]) ?
-					`Transcription: ${data.results[0].alternatives[0].transcript}\n` :
-					`\n\nReached transcription time limit, press Ctrl+C\n`);
 			});
 	}
 });
