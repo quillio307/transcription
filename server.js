@@ -20,7 +20,9 @@ if (cluster.isMaster) {
 	const Speech = require('@google-cloud/speech');
 
 	// Instantiates a client
-	const speech = Speech();
+	const speech = Speech({
+		keyFilename: './Quillio-5f9e524ab0d0.json'
+	});
 
 	// The encoding of the audio file, e.g. 'LINEAR16'
 	const encoding = 'LINEAR16';
