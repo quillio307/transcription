@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+<title>GST Through Websocket</title>
 </head>
 <body>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+<h1>Start Talking</h1>
+<ul id="messages">
+	
+</ul>
+<br>
+<ul><li id="tempChunk"></li></ul>
 <audio id="player" controls></audio>
 </body>
 <script
@@ -14,6 +18,7 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
 <script>
+
 $(document).ready(function(){
 
 //     // Create WebSocket connection.
@@ -22,7 +27,25 @@ socket.addEventListener('open', function (event) {
     socket.send('Hello Server!');
 });
 socket.addEventListener('message', function (event) {
-     console.log('Message from server: ', event.data);
+	let msg = JSON.parse(event.data);
+	if(msg[0] && msg[0].alternatives[0]){
+		let alt = msg[0].alternatives[0];
+		console.log(msg[0].isFinal);
+		if(msg[0].isFinal === true){
+			$('#tempChunk').html('');
+			$('ul#messages').append('<li>'+ alt.transcript +'</li>');
+		}else{
+			console.log(alt.transcript);
+			$('#tempChunk').html(alt.transcript);
+		}
+		
+	}
+	/*
+	console.log(msg);
+	console.log(
+        (msg[0] && msg[0].alternatives[0])
+          ? `Transcription: ${msg[0].alternatives[0].transcript}\n`
+          : `\n\nReached transcription time limit, press Ctrl+C\n`);*/
 });
 // console.log("Hello");
 // // Connection opened
@@ -105,13 +128,25 @@ var handleSuccess = function(stream) {
 
     processor.onaudioprocess = function(e) {
       // Do something with the data, i.e Convert this to WAV
-      console.log("Chunk");
+      if(socket.readyState == 1){
+      	socket.send(convertFloat32ToInt16(e.inputBuffer.getChannelData(0)));
+      }
+      
     };
   };
 
   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
       .then(handleSuccess);
 });
+
+function convertFloat32ToInt16(buffer) {
+  l = buffer.length;
+  buf = new Int16Array(l);
+  while (l--) {
+    buf[l] = Math.min(1, buffer[l])*0x7FFF;
+  }
+  return buf.buffer;
+}
 	
 </script>
 </html>
