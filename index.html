@@ -20,9 +20,9 @@
 <script>
 
 $(document).ready(function(){
-
+var context = new AudioContext();
 //     // Create WebSocket connection.
-const socket = new WebSocket('ws://localhost:5000');
+const socket = new WebSocket(`ws://localhost:5000/?sampRate=${context.sampleRate}`);
 socket.addEventListener('open', function (event) {
     socket.send('Hello Server!');
 });
@@ -118,14 +118,14 @@ var handleSuccess = function(stream) {
       .then(handleSuccess);
       //mediaStream.getAudioTracks()[0].enabled = true;*/
 
-      var handleSuccess = function(stream) {
-    var context = new AudioContext();
+    var handleSuccess = function(stream) {
+    
     var source = context.createMediaStreamSource(stream);
     var processor = context.createScriptProcessor(1024, 1, 1);
 
     source.connect(processor);
     processor.connect(context.destination);
-
+    console.log(context.sampleRate);
     processor.onaudioprocess = function(e) {
       // Do something with the data, i.e Convert this to WAV
       if(socket.readyState == 1){

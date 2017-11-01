@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-const record = require('node-record-lpcm16');
+const url = require('url');
 
 // Imports the Google Cloud client library
 const Speech = require('@google-cloud/speech');
@@ -11,27 +11,38 @@ const speech = Speech();
 const encoding = 'LINEAR16';
 
 // The sample rate of the audio file in hertz, e.g. 16000
-const sampleRateHertz = 44100;
+
 
 // The BCP-47 language code to use, e.g. 'en-US'
 const languageCode = 'en-US';
 
-const request = {
-	config: {
-		encoding: encoding,
-		sampleRateHertz: sampleRateHertz,
-		languageCode: languageCode
-	},
-	interimResults: true // If you want interim results, set this to true
-};
+
 
 
 const wss = new WebSocket.Server({
 	port: 5000
 });
 
-wss.on('connection', function connection(ws) {
+wss.on('connection', function connection(ws, req) {
 	// Create a recognize stream
+	let rt = url.parse(req.url, true).query.sampRate;
+	if(rt === undefined){
+		process.stdout.write(`Denied connection to ${req.url}\n`);
+		ws.close();
+		return;
+	}
+	process.stdout.write(`Accepted connection to ${req.url}\n`);
+	const sampleRateHertz = parseInt(rt);
+
+	const request = {
+		config: {
+			encoding: encoding,
+			sampleRateHertz: sampleRateHertz,
+			languageCode: languageCode
+		},
+		interimResults: true // If you want interim results, set this to true
+	};
+
 	let recognizeStream;
 	initStream();
 
@@ -48,12 +59,16 @@ wss.on('connection', function connection(ws) {
 				initStream();
 			})
 			.on('data', (data) => {
-				ws.send(JSON.stringify(data.results));
+				try{
+					ws.send(JSON.stringify(data.results));	
+				}catch(e){
+					process.stdout.write("Client send error");
+					if(ws.isAlive === false) ws.terminate();
+				}
 				process.stdout.write(
 					(data.results[0] && data.results[0].alternatives[0]) ?
 					`Transcription: ${data.results[0].alternatives[0].transcript}\n` :
 					`\n\nReached transcription time limit, press Ctrl+C\n`);
 			});
-				
 	}
 });
