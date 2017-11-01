@@ -27,14 +27,8 @@ if (cluster.isMaster) {
 	// The encoding of the audio file, e.g. 'LINEAR16'
 	const encoding = 'LINEAR16';
 
-	// The sample rate of the audio file in hertz, e.g. 16000
-
-
 	// The BCP-47 language code to use, e.g. 'en-US'
 	const languageCode = 'en-US';
-
-
-
 
 	const wss = new WebSocket.Server({
 		port: process.env.PORT
