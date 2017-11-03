@@ -45,7 +45,7 @@ if (cluster.isMaster) {
 		process.stdout.write(`Accepted connection to ${req.url}\n`);
 		const sampleRateHertz = parseInt(rt);
 		let phrasesString = url.parse(req.url, true).query.keywords;
-		let phrases = phrasesString.split(" ");
+		let phrases = phrasesString? phrasesString.split(" ") : [];
 		const request = {
 			config: {
 				encoding: encoding,
