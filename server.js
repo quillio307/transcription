@@ -44,12 +44,16 @@ if (cluster.isMaster) {
 		}
 		process.stdout.write(`Accepted connection to ${req.url}\n`);
 		const sampleRateHertz = parseInt(rt);
-
+		let phrasesString = url.parse(req.url, true).query.keywords;
+		let phrases = phrasesString? phrasesString.split(" ") : [];
 		const request = {
 			config: {
 				encoding: encoding,
 				sampleRateHertz: sampleRateHertz,
-				languageCode: languageCode
+				languageCode: languageCode,
+				speechContexts: {
+					phrases: phrases
+				}
 			},
 			interimResults: true // If you want interim results, set this to true
 		};
